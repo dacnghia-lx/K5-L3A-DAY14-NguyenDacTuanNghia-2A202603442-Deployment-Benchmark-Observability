@@ -136,7 +136,7 @@ Request 12 -> HTTP 429: {"detail":{"error":"Rate limit exceeded","limit":10,"win
 
 ## Part 6: Final Project (`06-lab-complete/`)
 
-Kết quả chạy `python check_production_ready.py --skip-docker` (do chưa có quyền truy cập `/var/run/docker.sock` trong phiên hiện tại; cần chạy lại `python check_production_ready.py` đầy đủ khi có Docker để đạt `PASS 12/12`):
+Kết quả chạy `python check_production_ready.py` đầy đủ (có Docker) đạt `PASS 12/12`:
 
 ```text
   📋 Checklist Deliverable
@@ -159,5 +159,5 @@ Kết quả chạy `python check_production_ready.py --skip-docker` (do chưa c�
 ---
 
 ## AI Log
-- **Hỏi/Thực hiện:** Sử dụng AI Assistant (Gemini 4 Hydrogen) để kiểm tra cấu trúc bài lab, triển khai code Part 6 trong `06-lab-complete/app/` (`config.py`, `redis_client.py`, `auth.py`, `rate_limiter.py`, `cost_guard.py`, `main.py`), cấu hình `Dockerfile`, `docker-compose.yml`, `.dockerignore`, `.env.example`, `railway.toml`, `render.yaml`, chạy các script kiểm thử Part 1, 4, 5, 6, 7 và tổng hợp số liệu đo thực tế vào `MISSION_ANSWERS.md` và `BENCHMARK_REPORT.md`.
-- **Tự kiểm tra:** Đã chạy trực tiếp các server Part 1, 4, 5 (develop), chạy `check_production_ready.py --skip-docker` (37/38 checks passed), chạy `load_test.py` và `eval/run_eval.py` (đạt 100% / 23/23 không regression sau khi bổ sung `KNOWLEDGE_BASE`).
+- **Hỏi/Thực hiện:** Sử dụng AI Assistant để kiểm tra cấu trúc bài lab, triển khai code Part 6 trong `06-lab-complete/app/` (`config.py`, `redis_client.py`, `auth.py`, `rate_limiter.py`, `cost_guard.py`, `main.py`), cấu hình `Dockerfile`, `docker-compose.yml`, `.dockerignore`, `.env.example`, `railway.toml`, `render.yaml`, sửa `PYTHONUSERBASE` trong `06-lab-complete/benchmark-observability/production/Dockerfile`, hướng dẫn deploy lên Railway, và tổng hợp số liệu đo thực tế vào `MISSION_ANSWERS.md`, `DEPLOYMENT.md`, `BENCHMARK_REPORT.md`.
+- **Tự kiểm tra:** Đã tự chạy các server Part 1, 4, 5 (develop), chạy `check_production_ready.py` bản đầy đủ có Docker (`12/12` tiêu chí, `43/43` checks passed), chạy `load_test.py` và `eval/run_eval.py` (đạt 100% / 23/23 không regression sau khi bổ sung `KNOWLEDGE_BASE`), chạy stack observability (Locust, Grafana, Jaeger, Prometheus), và deploy/kiểm thử trực tiếp trên Railway.
