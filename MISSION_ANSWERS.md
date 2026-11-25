@@ -45,7 +45,10 @@ Kết quả thực tế:
 - Trong `02-docker/production/Dockerfile`:
   - **Stage 1 (`builder`):** Dùng `python:3.11-slim`, cài `gcc`, `libpq-dev` và `pip install --user -r requirements.txt` vào `/root/.local`.
   - **Stage 2 (`runtime`):** Dùng `python:3.11-slim`, tạo non-root user `appuser`, chỉ `COPY --from=builder /root/.local /home/appuser/.local` và copy source code (`main.py`, `utils/mock_llm.py`), không mang theo `gcc` hay build tools nên image nhỏ gọn và an toàn hơn.
-- Kết quả đo `docker images`: *(Chưa chạy được trong phiên hiện tại do user `mrballs` chưa thuộc nhóm `docker` để truy cập `/var/run/docker.sock` — cần chạy `docker build` và `docker images` sau khi cấp quyền Docker)*.
+- Kết quả đo `docker images`: 
+IMAGE               ID             DISK USAGE   CONTENT SIZE   EXTRA
+my-agent:advanced   963bd0f9f957        237MB         57.4MB        
+my-agent:develop    086e7662a204       1.66GB          426MB    
 
 ### Exercise 2.4: Kiến trúc Docker Compose (`02-docker/production/docker-compose.yml`)
 Các service trong stack giao tiếp qua bridge network `internal`:
@@ -63,7 +66,8 @@ Client ──▶ nginx (:80/:443) ──▶ agent (:8000, runtime target) ──
 ## Part 3: Cloud Deployment
 
 ### Exercise 3.1 / 3.2: Deploy Agent Part 6 lên Cloud
-- URL public: *(Cần deploy `06-lab-complete/` lên Railway hoặc Render từ tài khoản cá nhân và cập nhật URL vào đây + `DEPLOYMENT.md`)*
+- URL public: `https://k5-l3a-day14-nguyendactuannghia-2a202603442-productio-f58e5fca.up.railway.app`
+- Nền tảng: Railway — Root Directory `06-lab-complete`, builder Dockerfile, Redis add-on inject `REDIS_URL`
 - Screenshots: `screenshots/dashboard.png`, `screenshots/running.png`, `screenshots/test.png`
 
 ### So sánh `railway.toml` và `render.yaml`
